@@ -210,7 +210,7 @@ if selected == "Informações":
 # ==================================================================== #
 # =========================== ABA SOBRE ============================== #
 elif selected == "Sobre e Entrevistas":
-    st.header(f"ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ{selected}", divider="red")
+    st.header(f"ㅤㅤㅤㅤㅤㅤㅤㅤㅤ{selected}", divider="red")
     
     st.markdown("### EcoTech - O Início")
 
