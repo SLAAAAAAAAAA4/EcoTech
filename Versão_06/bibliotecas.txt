@@ -1,0 +1,12 @@
+python -m pip install toml
+python -m pip install streamlit
+python -m pip install google-genai
+python -m pip install plotly
+python -m pip install streamlit-option-menu
+python -m pip install pandas
+python -m pip install spacy
+python -m pip install wordcloud
+python -m pip install streamlit-autorefresh
+python -m pip install folium
+python -m pip install streamlit-folium
+python -m pip install streamlit-extras
