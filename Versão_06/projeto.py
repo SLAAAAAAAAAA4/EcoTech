@@ -365,33 +365,33 @@ elif selected == "Sobre e Entrevistas":
 # =========================== ABA OPINIÕES =========================== #
 elif selected == "Opiniões":
 
-    st.header(f"ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ{selected}", divider="blue")
-    st.markdown("#### Nuven de Palavras")
+    st.header(f"{selected}", divider="blue")
+    st.markdown("#### Nuvem de Palavras")
     logging.basicConfig(level=logging.DEBUG)
 
     st.markdown(
-    """
-    <style>
-    div.block-container {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
-    #MainMenu {visibility: hidden;}
-    header {visibility: hidden;}
-    footer {visibility: hidden;}
-    img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .centered {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
+        """
+        <style>
+        div.block-container {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        #MainMenu {visibility: hidden;}
+        header {visibility: hidden;}
+        footer {visibility: hidden;}
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
     )
 
     st_autorefresh(interval=5120000, key="data_refresh")
@@ -410,7 +410,6 @@ elif selected == "Opiniões":
                 try:
                     return spacy.load("pt_core_news_lg"), "pt_core_news_lg"
                 except:
-                    # fallback — funciona na nuvem sem modelo instalado
                     from spacy.lang.pt import Portuguese
                     nlp_blank = Portuguese()
                     if "sentencizer" not in nlp_blank.pipe_names:
@@ -426,13 +425,10 @@ elif selected == "Opiniões":
     @st.cache_data(ttl=30)
     def load_data(csv_url):
         df = pd.read_csv(csv_url)
-
-        # renomeia a segunda coluna para "percepcao"
         if len(df.columns) > 1:
             original = df.columns[1]
             df.rename(columns={original: "percepcao"}, inplace=True)
             logging.debug(f"Coluna '{original}' renomeada para 'percepcao'.")
-
         return df
 
     csv_url = "https://docs.google.com/spreadsheets/d/1dsAaDSCpLYts8Y9P6Jbd62yLaHTjvUN_B3H8XBH-JbQ/export?format=csv&id=1dsAaDSCpLYts8Y9P6Jbd62yLaHTjvUN_B3H8XBH-JbQ&gid=1585034273"
@@ -473,7 +469,7 @@ elif selected == "Opiniões":
         "Se o mundo comessase q descartar corretamente, o meio ambiente vai ter a oportunidade de se regenerar"
     ]
 
-    tokens = None
+    tokens = []
     wordcloud_image = None
     freq_fig = None
 
@@ -481,54 +477,54 @@ elif selected == "Opiniões":
         texts = data["percepcao"].dropna().tolist()
         tokens = process_texts(texts)
         tokens = [t for t in tokens if t not in exclude_words]
+
+        if tokens:
+            # ================================
+            # 🔥 NUVEM DE PALAVRAS
+            # ================================
+            def generate_wordcloud(tokens):
+                freq = Counter(tokens)
+                wc = WordCloud(
+                    width=600,
+                    height=600,
+                    background_color="white",
+                    colormap="viridis",
+                    max_words=100
+                )
+                wc.generate_from_frequencies(freq)
+                return wc.to_array()
+
+            def create_frequency_data(tokens):
+                freq = Counter(tokens)
+                df_freq = pd.DataFrame(freq.items(), columns=["palavra", "frequencia"])
+                return df_freq.sort_values(by="frequencia", ascending=False).head(10)
+
+            def create_frequency_chart(tokens):
+                df_freq = create_frequency_data(tokens)
+                fig = px.bar(
+                    df_freq,
+                    x="palavra",
+                    y="frequencia",
+                    text="frequencia",
+                    labels={"palavra": "Percepção", "frequencia": "Frequência"},
+                    color="frequencia",
+                    color_continuous_scale=["#003300", "#006600", "#009933", "#33cc33", "#99ff99"]
+                )
+                fig.update_traces(texttemplate='%{text}', textposition='outside')
+                fig.update_layout(xaxis_tickangle=-45, margin=dict(t=40, b=40))
+                return fig
+
+            wordcloud_image = generate_wordcloud(tokens)
+            freq_fig = create_frequency_chart(tokens)
+        else:
+            st.warning("Tokens processados estão vazios. Verifique os dados ou palavras excluídas.")
     else:
-        st.write("Coluna 'percepcao' não encontrada ou vazia.")
-
-    # ================================
-    # 🔥 NUVEM DE PALAVRAS
-    # ================================
-    def generate_wordcloud(tokens):
-        freq = Counter(tokens)
-        wc = WordCloud(
-            width=600,
-            height=600,
-            background_color="white",
-            colormap="viridis",
-            max_words=100
-        )
-        wc.generate_from_frequencies(freq)
-        return wc.to_array()
-
-    def create_frequency_data(tokens):
-        freq = Counter(tokens)
-        df_freq = pd.DataFrame(freq.items(), columns=["palavra", "frequencia"])
-        return df_freq.sort_values(by="frequencia", ascending=False).head(10)
-
-    def create_frequency_chart(tokens):
-        df_freq = create_frequency_data(tokens)
-        fig = px.bar(
-            df_freq,
-            x="palavra",
-            y="frequencia",
-            text="frequencia",
-            labels={"palavra": "Percepção", "frequencia": "Frequência"},
-            color="frequencia",
-            color_continuous_scale=[
-                "#003300", "#006600", "#009933", "#33cc33", "#99ff99"
-            ]
-        )
-        fig.update_traces(texttemplate='%{text}', textposition='outside')
-        fig.update_layout(xaxis_tickangle=-45, margin=dict(t=40, b=40))
-        return fig
-
-    if tokens:
-        wordcloud_image = generate_wordcloud(tokens)
-        freq_fig = create_frequency_chart(tokens)
+        st.warning("Coluna 'percepcao' não encontrada ou vazia.")
 
     # ================================
     # 🔥 EXIBIÇÃO
     # ================================
-    with st.container(border=True):
+    with st.container():
         col1, col2 = st.columns(2)
 
         with col1:
@@ -537,7 +533,7 @@ elif selected == "Opiniões":
             if wordcloud_image is not None:
                 st.image(wordcloud_image, use_container_width=True)
             else:
-                st.write("Sem dados suficientes.")
+                st.write("Sem nuvem de palavras disponível.")
             st.markdown("</div>", unsafe_allow_html=True)
 
         with col2:
@@ -546,7 +542,7 @@ elif selected == "Opiniões":
             if freq_fig is not None:
                 st.plotly_chart(freq_fig, use_container_width=True)
             else:
-                st.write("Sem dados suficientes.")
+                st.write("Sem gráfico de frequência disponível.")
             st.markdown("</div>", unsafe_allow_html=True)
 
     # ================================
@@ -565,6 +561,7 @@ elif selected == "Opiniões":
             st.write(tokens[:15])
         else:
             st.write("Nenhum token extraído.")
+
 # =================================================================== #
 # ======================== Pontos de Coleta ========================= #
 elif selected == "Pontos de Coleta":
