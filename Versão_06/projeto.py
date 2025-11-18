@@ -261,7 +261,31 @@ elif selected == "Sobre e Entrevistas":
             "Essa virada de abordagem não apenas acelerou o desenvolvimento, mas também fortaleceu o espírito de equipe — mostrando que, mesmo diante de imprevistos e prazos apertados, a união e a adaptação são fundamentais para transformar uma ideia inicial em um resultado real e funcional."
         )
         
-    st.header("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤEntrevistas - E-Lixo", divider="green")    
+    st.markdown("""
+    <style>
+    .divider-red {
+        border-top: 3px solid red;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    h2 {
+        text-align: center;
+        color: black;
+        font-size: 4vw;
+    }
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 6vw;
+        }
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"<h2>Entrevistas</h2>", unsafe_allow_html=True)
+    st.divider()
 
         # CSS para padronizar imagens quadradas e centralizadas
     st.markdown("""
