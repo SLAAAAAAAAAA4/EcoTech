@@ -478,7 +478,7 @@ if selected == "Opiniões":
     def create_manual_chart():
         # DADOS FIXOS: (Os valores que você deseja que apareçam)
         dados_manuais = {
-            "palavra": ["poluição", "carregador", "celulares", "eletrônico", "pilhas", "computador", "bateria", "celular", "pilha"],
+            "Percepção": ["poluição", "carregador", "celulares", "eletrônico", "pilhas", "computador", "bateria", "celular", "pilha"],
             "frequencia": [3, 3, 4, 4, 7, 7, 16, 16, 27]
         }
         df_manual = pd.DataFrame(dados_manuais)
@@ -496,7 +496,7 @@ if selected == "Opiniões":
 
         fig = px.bar(
             df_manual,
-            x="palavra",
+            x="Percepção",
             y="frequencia",
             text="frequencia",
             labels={"palavra": "Percepção", "frequencia": "Frequência"},
