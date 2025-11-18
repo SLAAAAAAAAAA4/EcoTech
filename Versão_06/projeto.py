@@ -499,11 +499,11 @@ if selected == "Opiniões":
             x="Percepção",
             y="frequencia",
             text="frequencia",
-            labels={"palavra": "Percepção", "frequencia": "Frequência"},
+            labels={"Percepção": "Percepção", "frequencia": "Frequência"},
             color="cor", 
             color_discrete_map={COR_VERDE_SOLIDA: COR_VERDE_SOLIDA},
             # CORREÇÃO 3: Força o Plotly a tratar a coluna X como categórica para manter a ordem
-            category_orders={"palavra": df_manual["palavra"].tolist()}
+            category_orders={"Percepção": df_manual["Percepção"].tolist()}
         )
         
         # CORREÇÃO 4: Remove a barra de cor que não é necessária no gráfico final
