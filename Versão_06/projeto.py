@@ -472,56 +472,79 @@ if selected == "Opiniões":
         if tokens:
             wordcloud_image = generate_wordcloud(tokens)
             
- # =======================================================
-    # 🔹 FUNÇÃO ISOLADA DO GRÁFICO MANUAL (DADOS FIXOS)
-    # =======================================================
-    def create_manual_chart():
-        # DADOS FIXOS: (Os valores que você deseja que apareçam)
-        dados_manuais = {
-            "Percepção": ["poluição", "carregador", "celulares", "eletrônico", "pilhas", "computador", "bateria", "celular", "pilha"],
-            "frequencia": [3, 3, 4, 4, 7, 7, 16, 16, 27]
-        }
-        df_manual = pd.DataFrame(dados_manuais)
-        
-        # CORREÇÃO 1: Garante que a coluna 'frequencia' é numérica
-        df_manual['frequencia'] = df_manual['frequencia'].astype(int)
 
-        # Reordena para a visualização em escada (crescente)
-        df_manual = df_manual.sort_values(by="frequencia", ascending=False)
-
-        # CORREÇÃO 2: Define cores para replicar o verde neon/brilhante da Imagem 3
-        # Usaremos verde sólido, mas mais brilhante
-        COR_VERDE_SOLIDA = "rgb(0, 204, 0)" 
-        df_manual["cor"] = COR_VERDE_SOLIDA
-
-        fig = px.bar(
-            df_manual,
-            x="Percepção",
-            y="frequencia",
-            text="frequencia",
-            labels={"Percepção": "Percepção", "frequencia": "Frequência"},
-            color="cor", 
-            color_discrete_map={COR_VERDE_SOLIDA: COR_VERDE_SOLIDA},
-            # CORREÇÃO 3: Força o Plotly a tratar a coluna X como categórica para manter a ordem
-            category_orders={"Percepção": df_manual["Percepção"].tolist()}
-        )
-        
-        # CORREÇÃO 4: Remove a barra de cor que não é necessária no gráfico final
-        fig.update_layout(showlegend=False)
-
-        fig.update_traces(texttemplate="%{y}", textposition="outside") 
-        fig.update_layout(
-            xaxis_tickangle=-45,
-            margin=dict(t=40, b=40, l=20, r=20),
-            height=400,
-            width=700,
-            plot_bgcolor='rgb(248, 248, 248)',
-            paper_bgcolor='rgb(248, 248, 248)',
-            title='Contagem de palavras'
-        )
-
-        return fig
+    # ================================
+    # 🔹 DADOS FIXOS (manuais)
+    # ================================
+def create_manual_chart():
+    dados_manuais = {
+        "Percepção": ["poluição", "carregador", "celulares", "eletrônico", 
+                      "pilhas", "computador", "bateria", "celular", "pilha"],
+        "frequencia": [3, 3, 4, 4, 7, 7, 16, 16, 27]
+    }
+    df_manual = pd.DataFrame(dados_manuais)
     
+    # ================================
+    # 🔹 LIMITE MÁXIMO 30
+    # ================================
+    df_manual['frequencia'] = df_manual['frequencia'].astype(int).apply(lambda x: min(x, 30))
+
+    # ================================
+    # 🔹 SELEÇÃO INTERATIVA
+    # ================================
+    itens_selecionados = st.multiselect(
+        "Selecione os itens que deseja exibir:",
+        options=df_manual["Percepção"].tolist(),
+        default=df_manual["Percepção"].tolist()
+    )
+
+    df_plot = df_manual[df_manual["Percepção"].isin(itens_selecionados)]
+
+    # ================================
+    # 🔹 ORDENAR CRESCENTE
+    # ================================
+    df_plot = df_plot.sort_values(by="frequencia", ascending=False)
+
+    # ================================
+    # 🔹 DEFINIR COR VERDE SÓLIDA
+    # ================================
+    COR_VERDE_SOLIDA = "rgb(0, 204, 0)"
+    df_plot["cor"] = COR_VERDE_SOLIDA
+
+    # ================================
+    # 🔹 CRIAR GRÁFICO
+    # ================================
+    fig = px.bar(
+        df_plot,
+        x="Percepção",
+        y="frequencia",
+        text="frequencia",
+        labels={"Percepção": "Percepção", "frequencia": "Frequência"},
+        color="cor",
+        color_discrete_map={COR_VERDE_SOLIDA: COR_VERDE_SOLIDA},
+        category_orders={"Percepção": df_plot["Percepção"].tolist()}
+    )
+
+    fig.update_traces(texttemplate="%{y}", textposition="outside")
+    fig.update_layout(
+        showlegend=False,
+        xaxis_tickangle=-45,
+        margin=dict(t=40, b=40, l=20, r=20),
+        height=400,
+        width=700,
+        plot_bgcolor='rgb(248, 248, 248)',
+        paper_bgcolor='rgb(248, 248, 248)',
+        title='Contagem de palavras'
+    )
+
+    return fig
+
+# ================================
+# 🔹 CHAMADA PARA EXIBIÇÃO
+# ================================
+if st.button("Mostrar gráfico manual"):
+    fig_manual = create_manual_chart()
+    st.plotly_chart(fig_manual, use_container_width=True)
     # ================================
     # 🔹 EXIBIÇÃO (SEQUENCIAL / VERTICAL)
     # ================================
