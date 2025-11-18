@@ -1,14 +1,12 @@
 import os
-import toml
 import time
 import logging
+import toml
 import streamlit as st
-from google import genai
+import google.generativeai as genai
 import plotly.express as px
-from google.genai import types 
 from streamlit_option_menu import option_menu
 import pandas as pd
-import plotly.express as px
 import spacy
 from wordcloud import WordCloud
 from collections import Counter
@@ -709,133 +707,73 @@ elif selected == "ChatBot":
     st.header(f"ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ🤖 EcoBot", divider="green")
     st.markdown("Fale com nosso assistente virtual especializado **apenas sobre descarte eletrônico e reciclagem tecnológica.**")
     
-    # --- CONSTANTES DE TEMPO ---
     TIMEOUT_MINUTES = 15
-    TIMEOUT_SECONDS = TIMEOUT_MINUTES * 60 
-    
-    # --- 1. INICIALIZAÇÃO DE TODAS AS VARIÁVEIS DE ESTADO ---
-    
-    if 'historico' not in st.session_state:
-        st.session_state.historico = []
-    
-    if 'chat_initialized' not in st.session_state:
-        st.session_state.chat_initialized = False
+    TIMEOUT_SECONDS = TIMEOUT_MINUTES * 60
 
-    # Inicializa 'last_activity_time'
-    if 'last_activity_time' not in st.session_state:
+    # --- ESTADOS ---
+    if "historico" not in st.session_state:
+        st.session_state.historico = []  # lista de {"role":"user/model", "text":""}
+
+    if "last_activity_time" not in st.session_state:
         st.session_state.last_activity_time = time.time()
 
-
-    # --- 2. GESTÃO DE TEMPO E LIMPEZA AUTOMÁTICA (INVISÍVEL) ---
-    
+    # --- TIMEOUT ---
     current_time = time.time()
-    
     elapsed_time = current_time - st.session_state.last_activity_time
-    time_remaining = max(0, TIMEOUT_SECONDS - elapsed_time)
 
-    # Verifica se o tempo limite foi atingido (Limpeza)
-    if time_remaining == 0:
-        # AQUI O HISTÓRICO É LIMPO
+    if elapsed_time >= TIMEOUT_SECONDS:
         st.session_state.historico = []
-        st.session_state.chat_initialized = False 
-        st.session_state.last_activity_time = current_time # Reseta o timer para o momento da limpeza
-        st.warning(f"Sessão expirada após {TIMEOUT_MINUTES} minutos de inatividade. A conversa foi limpa.")
-        st.rerun() 
-    
-    # --- 3. INICIALIZAÇÃO DO CHAT (Injetando o System Instruction) ---
+        st.session_state.last_activity_time = current_time
+        st.warning(f"Sessão expirada após {TIMEOUT_MINUTES} minutos. Conversa limpa.")
+        st.rerun()
 
-    # 3.1. Cria o objeto de configuração com a instrução de sistema
-    # Este é o caminho canônico atual: GenerateContentConfig.
-    chat_config = types.GenerateContentConfig(
+    # --- MODELO ---
+    model = genai.GenerativeModel(
+        model_name=MODEL_NAME,  
         system_instruction=SYSTEM_INSTRUCTION
     )
 
-    # Se o histórico não existe ou o chat não foi inicializado, criamos a sessão
-    if not st.session_state.chat_initialized:
-        
-        try:
-            # 3.2. Cria o chat passando o objeto de configuração no argumento 'config'
-            chat = modelo.chats.create(
-                model=MODEL_NAME, 
-                config=chat_config, # Passa a instrução aqui
-                history=[]
-            )
-            # O histórico real inicia vazio, mas a instrução já está aplicada
-            st.session_state.historico = chat.get_history()
-            st.session_state.chat_initialized = True 
-            
-        except Exception as e:
-            st.error(f"Erro ao iniciar a sessão de chat: {e}")
-            st.stop()
-    else:
-        # Se já inicializado, apenas recria o objeto chat com o histórico existente
-        try:
-            # Ao recriar, re-incluímos o objeto de configuração
-            chat = modelo.chats.create(
-                model=MODEL_NAME, 
-                config=chat_config, # Re-inclui a instrução
-                history=st.session_state.historico
-            )
-        except Exception as e:
-            st.error(f"Erro ao recriar a sessão de chat: {e}")
-            st.stop()
+    # --- EXIBIR HISTÓRICO ---
+    for msg in st.session_state.historico:
+        with st.chat_message("assistant" if msg["role"] == "model" else "user"):
+            st.markdown(msg["text"])
 
-
-    # --- 4. MOSTRA HISTÓRICO ---
-    
-    historico_completo = chat.get_history()
-    historico_visivel = historico_completo 
-
-    
-    for mensagem in historico_visivel:
-        # Ignora a mensagem se ela não tiver conteúdo de texto
-        if not hasattr(mensagem.parts[0], 'text'):
-            continue
-            
-        # Ajusta o role para a exibição no Streamlit
-        role = 'assistant' if mensagem.role == 'model' else mensagem.role
-        with st.chat_message(role):
-            st.markdown(mensagem.parts[0].text)
-
-
-    # --- 5. CAMPO DE ENTRADA E GERAÇÃO DE RESPOSTA ---
-    
+    # --- INPUT ---
     prompt = st.chat_input("Envie sua pergunta sobre descarte eletrônico...")
-    
-    if prompt:
-        # ATUALIZA O TEMPO DE ATIVIDADE APENAS NA INTERAÇÃO
-        st.session_state.last_activity_time = time.time()
-        
-        with st.chat_message("user"):
-            st.markdown(f"{prompt}")
 
+    if prompt:
+        st.session_state.last_activity_time = time.time()
+
+        # registra user
+        st.session_state.historico.append({"role": "user", "text": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        # gera resposta com streaming
         with st.chat_message("assistant"):
-            msg_placeholder = st.empty()
-            msg_placeholder.markdown("Pensando...")
-            time.sleep(0.5)
-            msg_placeholder.markdown("Gerando resposta...")
-            time.sleep(0.2)
-            
+            placeholder = st.empty()
             resposta = ""
             try:
-                # Usa o método correto para streaming
-                for chunk in chat.send_message_stream(prompt):
+                stream = model.generate_content(
+                    prompt,
+                    stream=True
+                )
+
+                for chunk in stream:
                     if chunk.text:
                         resposta += chunk.text
-                        msg_placeholder.markdown(resposta + "▌")
+                        placeholder.markdown(resposta + "▌")
 
-                msg_placeholder.markdown(resposta)
-                
-                # Atualiza o histórico de sessão com a nova conversa
-                st.session_state.historico = chat.get_history()
-                
+                placeholder.markdown(resposta)
+
+                # registra modelo
+                st.session_state.historico.append({"role": "model", "text": resposta})
+
             except Exception as e:
-                st.error(f"Ocorreu um erro ao gerar a resposta: {e}")
+                st.error(f"Erro ao gerar resposta: {e}")
 
-    # --- 6. BOTÃO DE LIMPEZA MANUAL ---
+    # --- LIMPAR ---
     if st.button("🧹 Limpar conversa"):
-        # Limpa o histórico completamente, forçando a re-inicialização do chat na próxima vez.
-        st.session_state.historico = [] 
-        st.session_state.chat_initialized = False 
-        st.session_state.last_activity_time = time.time() 
+        st.session_state.historico = []
+        st.session_state.last_activity_time = time.time()
         st.rerun()
