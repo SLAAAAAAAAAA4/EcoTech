@@ -122,7 +122,7 @@ if selected == "Informações":
             </style>
             """, unsafe_allow_html=True)
     st.markdown(f"<h2>Informções</h2>", unsafe_allow_html=True)
-    st.divider()
+    st.header("", divider="green")
     
     st.markdown("#### Descarte de Lixo Eletrônico")
     
@@ -305,7 +305,7 @@ elif selected == "Sobre e Entrevistas":
     """, unsafe_allow_html=True)
 
     st.markdown(f"<h2>Entrevistas</h2>", unsafe_allow_html=True)
-    st.divider()
+    st.header("", divider = "green")
 
     st.markdown("""
     <style>
@@ -425,7 +425,7 @@ elif selected == "Opiniões":
             </style>
             """, unsafe_allow_html=True)
     st.markdown(f"<h2>Opiniões</h2>", unsafe_allow_html=True)
-    st.divider()
+    st.header("", divider="red")
 
     # ================================
     # 🔹 ESTILO CSS
@@ -604,7 +604,7 @@ elif selected == "Pontos de Coleta":
             </style>
             """, unsafe_allow_html=True)
     st.markdown(f"<h2>Ponto de Coleta</h2>", unsafe_allow_html=True)
-    st.divider()
+    st.header("", divider="violet")
     
     st.title("♻️ Pontos de Coleta de Lixo Eletrônico no Brasil")
 
@@ -783,7 +783,7 @@ elif selected == "ChatBot":
             </style>
             """, unsafe_allow_html=True)
     st.markdown(f"<h2>EcoBot</h2>", unsafe_allow_html=True)
-    st.divider()
+    st.divider("", divider="green")
     st.markdown("Fale com nosso assistente virtual especializado **apenas sobre descarte eletrônico e reciclagem tecnológica.**")
     
     TIMEOUT_MINUTES = 15
