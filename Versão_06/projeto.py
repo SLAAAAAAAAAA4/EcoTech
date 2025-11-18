@@ -138,7 +138,7 @@ if selected == "Informações":
         "**Malefícios do Descarte Incorreto:** O descarte inadequado causa danos "
         "à saúde e ao meio ambiente, contribuindo para a contaminação do solo e da água."
     )
-    
+
     st.markdown(
         "### Tipos de Lixo Eletrônico:\n"
         "O lixo eletrônico é classificado em quatro (4) categorias diferentes:\n\n"
@@ -150,11 +150,10 @@ if selected == "Informações":
         "Muitos desses dispositivos contêm substâncias tóxicas que requerem tratamento específico para evitar o impacto ambiental.\n"
         "- **Linha Azul:** Eletrodomésticos de uso geral, como ferramentas elétricas e eletrônicas, brinquedos, dispositivos médicos e de monitoramento."
     )
-    # Link da imagem
-    url_imagem = "https://vcx.solutions/wp-content/uploads/2021/12/4-categoria-de-lixos-eletronicos_Prancheta-1-1024x836.png"
 
-    # Mostrar a imagem com largura média
-    st.image(url_imagem, caption="Categorias de Lixo Eletrônico", width=500)
+    # Imagem 1
+    url_imagem = "https://vcx.solutions/wp-content/uploads/2021/12/4-categoria-de-lixos-eletronicos_Prancheta-1-1024x836.png"
+    st.image(url_imagem, caption="Categorias de Lixo Eletrônico", use_column_width=True)
 
     st.markdown(
         "### O que descartar?\n"
@@ -163,26 +162,25 @@ if selected == "Informações":
         "- **Equipamentos de comunicações:** Fones de ouvido, cabos, carregadores.\n"
         "- **Outros:** Pilhas e baterias (de celular, de brinquedos, etc.), lâmpadas fluorescentes, CDs e DVDs."
     )
-    
+
     st.markdown(
         "### Bateria de Lítio\n"
         "Bateria íon-lítio ou bateria de íon lítio é um tipo de bateria recarregável "
         "muito utilizada em equipamentos eletrônicos portáteis."
     )
-    # Link da imagem
-    url_imagem = "https://tse2.mm.bing.net/th/id/OIP.O6bVxbkVhabSKwwdyt4qxgHaKe?w=1131&h=1600&rs=1&pid=ImgDetMain&o=7&rm=3"
 
-    # Mostrar a imagem com largura média
-    st.image(url_imagem, caption="Descarte de Bateria de Lítio", width=300)
+    # Imagem 2
+    url_imagem = "https://tse2.mm.bing.net/th/id/OIP.O6bVxbkVhabSKwwdyt4qxgHaKe?w=1131&h=1600&rs=1&pid=ImgDetMain&o=7&rm=3"
+    st.image(url_imagem, caption="Descarte de Bateria de Lítio", use_column_width=True)
+
     st.markdown(
         "### Risco da bateria de Lítio\n"
         "O principal risco é o de incêndio, já que as baterias de íon-lítio combinam "
         "materiais de alta energia com eletrólitos, muitas vezes inflamáveis. "
         "Danos no separador dentro das baterias podem causar um curto-circuito interno "
         "com altas chances de fuga térmica."
-        
     )
-    
+
     st.markdown(
         "### Lâmpadas fluorescentes\n"
         "O descarte correto de lâmpadas fluorescentes é essencial para proteger o meio "
@@ -190,17 +188,16 @@ if selected == "Informações":
         "Elas não devem ser jogadas no lixo comum, mas sim encaminhadas para pontos de "
         "coleta específicos ou empresas especializadas em tratamento de resíduos."
     )
-    # Link da imagem
-    url_imagem = "https://tse2.mm.bing.net/th/id/OIP.MrZrjUgxYC8MNgEEDIKj5AHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
 
-    # Mostrar a imagem com largura média
-    st.image(url_imagem, caption="Descarte de lâmpadas Fluorescntes", width=400)
+    # Imagem 3
+    url_imagem = "https://tse2.mm.bing.net/th/id/OIP.MrZrjUgxYC8MNgEEDIKj5AHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+    st.image(url_imagem, caption="Descarte de lâmpadas Fluorescentes", use_column_width=True)
+
     st.markdown(
         "### Riscos das lâmpadas\n"
         "O descarte incorreto pode causar danos ambientais, como contaminação do solo e da água, "
         "além de riscos à saúde humana devido à toxicidade do mercúrio."
     )
-
     with st.expander("ℹ️ Créditos"):
             
         st.markdown("""    **Créditos do Projeto EcoTech**
