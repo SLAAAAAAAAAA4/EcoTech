@@ -473,10 +473,11 @@ if selected == "Opiniões":
             wordcloud_image = generate_wordcloud(tokens)
             
 
-    # ================================
-    # 🔹 DADOS FIXOS (manuais)
-    # ================================
+# =======================================================
+# 🔹 FUNÇÃO DO GRÁFICO FIXO (DADOS DECIDIDOS PELO CÓDIGO)
+# =======================================================
 def create_manual_chart():
+    # DADOS FIXOS
     dados_manuais = {
         "Percepção": ["poluição", "carregador", "celulares", "eletrônico", 
                       "pilhas", "computador", "bateria", "celular", "pilha"],
@@ -484,45 +485,26 @@ def create_manual_chart():
     }
     df_manual = pd.DataFrame(dados_manuais)
     
-    # ================================
-    # 🔹 LIMITE MÁXIMO 30
-    # ================================
-    df_manual['frequencia'] = df_manual['frequencia'].astype(int).apply(lambda x: min(x, 30))
+    # LIMITE MÁXIMO DE 30
+    df_manual['frequencia'] = df_manual['frequencia'].apply(lambda x: min(x, 30))
 
-    # ================================
-    # 🔹 SELEÇÃO INTERATIVA
-    # ================================
-    itens_selecionados = st.multiselect(
-        "Selecione os itens que deseja exibir:",
-        options=df_manual["Percepção"].tolist(),
-        default=df_manual["Percepção"].tolist()
-    )
+    # ORDENAR DECRESCENTE
+    df_manual = df_manual.sort_values(by="frequencia", ascending=False)
 
-    df_plot = df_manual[df_manual["Percepção"].isin(itens_selecionados)]
-
-    # ================================
-    # 🔹 ORDENAR CRESCENTE
-    # ================================
-    df_plot = df_plot.sort_values(by="frequencia", ascending=False)
-
-    # ================================
-    # 🔹 DEFINIR COR VERDE SÓLIDA
-    # ================================
+    # COR VERDE SÓLIDA
     COR_VERDE_SOLIDA = "rgb(0, 204, 0)"
-    df_plot["cor"] = COR_VERDE_SOLIDA
+    df_manual["cor"] = COR_VERDE_SOLIDA
 
-    # ================================
-    # 🔹 CRIAR GRÁFICO
-    # ================================
+    # CRIAR GRÁFICO
     fig = px.bar(
-        df_plot,
+        df_manual,
         x="Percepção",
         y="frequencia",
         text="frequencia",
         labels={"Percepção": "Percepção", "frequencia": "Frequência"},
         color="cor",
         color_discrete_map={COR_VERDE_SOLIDA: COR_VERDE_SOLIDA},
-        category_orders={"Percepção": df_plot["Percepção"].tolist()}
+        category_orders={"Percepção": df_manual["Percepção"].tolist()}  # mantém a ordem
     )
 
     fig.update_traces(texttemplate="%{y}", textposition="outside")
@@ -539,6 +521,12 @@ def create_manual_chart():
 
     return fig
 
+# =======================================================
+# 🔹 EXIBIÇÃO NO STREAMLIT
+# =======================================================
+st.header("Gráfico de Frequência — Dados Fixos")
+fig_manual = create_manual_chart()
+st.plotly_chart(fig_manual, use_container_width=True)
 # ================================
 # 🔹 CHAMADA PARA EXIBIÇÃO
 # ================================
