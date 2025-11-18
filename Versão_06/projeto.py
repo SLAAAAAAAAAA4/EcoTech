@@ -212,19 +212,20 @@ if selected == "Informações":
 elif selected == "Sobre e Entrevistas":
     st.markdown("""
     <style>
-    .centralizado {
+    h1 {
         text-align: center;
-        font-size: 2.5vw;  /* Tamanho relativo à largura da tela */
-        font-weight: bold;
+        font-size: 4vw;  /* Ajusta tamanho relativo à tela */
         color: red;
     }
     @media (max-width: 768px) {
-        .centralizado {
-            font-size: 5vw; /* Ajuste em telas pequenas */
+        h1 {
+            font-size: 6vw;
         }
     }
     </style>
     """, unsafe_allow_html=True)
+    
+    st.markdown(f"# {selected}", unsafe_allow_html=True)
 
     st.markdown(f'<div class="centralizado">{selected}</div>', unsafe_allow_html=True)
     
