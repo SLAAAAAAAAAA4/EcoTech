@@ -507,13 +507,20 @@ elif selected == "Opiniões":
                     df_freq,
                     x="palavra",
                     y="frequencia",
-                    text="frequencia",
+                    text="frequencia",  # mostra os valores reais
                     labels={"palavra": "Percepção", "frequencia": "Frequência"},
                     color="frequencia",
-                    color_continuous_scale=["#003300", "#006600", "#009933", "#33cc33", "#99ff99"]
+                    color_continuous_scale=["#ccffcc", "#00cc00"]  # tons de verde semelhantes ao local
                 )
-                fig.update_traces(texttemplate='%{text}', textposition='outside')
-                fig.update_layout(xaxis_tickangle=-45, margin=dict(t=40, b=40))
+                fig.update_traces(
+                    texttemplate="%{text}",  # mostra os valores em vez de %{text}
+                    textposition='outside'
+                )
+                fig.update_layout(
+                    xaxis_tickangle=-45,
+                    margin=dict(t=40, b=40),
+                    coloraxis_showscale=False  # esconde a barra de cores se quiser
+                )
                 return fig
 
             wordcloud_image = generate_wordcloud(tokens)
