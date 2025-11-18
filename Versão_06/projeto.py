@@ -509,19 +509,18 @@ elif selected == "Opiniões":
                     y="frequencia",
                     text="frequencia",  # mostra os valores reais
                     labels={"palavra": "Percepção", "frequencia": "Frequência"},
-                    color="frequencia",
-                    color_continuous_scale=["#ccffcc", "#00cc00"]  # tons de verde semelhantes ao local
+                    color_discrete_sequence=px.colors.sequential.Greens  # força tons de verde
                 )
                 fig.update_traces(
-                    texttemplate="%{text}",  # mostra os valores em vez de %{text}
+                    texttemplate="%{y}",  # mostra o valor real da frequência
                     textposition='outside'
                 )
                 fig.update_layout(
                     xaxis_tickangle=-45,
-                    margin=dict(t=40, b=40),
-                    coloraxis_showscale=False  # esconde a barra de cores se quiser
+                    margin=dict(t=40, b=40)
                 )
                 return fig
+
 
             wordcloud_image = generate_wordcloud(tokens)
             freq_fig = create_frequency_chart(tokens)
