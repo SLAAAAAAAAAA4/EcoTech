@@ -16,6 +16,16 @@ from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
 from streamlit_extras.switch_page_button import switch_page
 
+try:
+    nlp = spacy.load("pt_core_news_sm")
+except OSError:
+    import subprocess
+    subprocess.run(["python", "-m", "spacy", "download", "pt_core_news_sm"])
+    nlp = spacy.load("pt_core_news_sm")
+
+# --- Agora você já pode usar o nlp normalmente ---
+doc = nlp("Exemplo de texto em português")
+
 
 # ====================== CONFIGURAÇÕES GERAIS ========================= #
 st.set_page_config(
