@@ -310,35 +310,16 @@ elif selected == "Sobre e Entrevistas":
     st.markdown(f"<h2>Entrevistas</h2>", unsafe_allow_html=True)
     st.divider()
 
-        # CSS para padronizar imagens quadradas e centralizadas
-    st.markdown("""
-        <style>
-        .fixed-img {
-            width: 100%;
-            max-width: 250px;  /* controla o tamanho máximo */
-            height: 250px;
-            object-fit: cover;
-            border-radius: 12px;
-            display: block;
-            margin: 0 auto; /* centraliza na coluna */
-        }
-        .caption {
-            text-align: center;
-            font-size: 15px;
-            margin-top: 6px;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-
-        # Video centralizado
     st.markdown("""
     <style>
+    /* Vídeo responsivo com espaçamento abaixo */
     .responsive-video {
         position: relative;
         padding-bottom: 56.25%; /* Proporção 16:9 */
         height: 0;
         overflow: hidden;
         border-radius: 12px;
+        margin-bottom: 40px; /* Espaço entre vídeo e imagens */
     }
     .responsive-video iframe {
         position: absolute;
@@ -347,6 +328,20 @@ elif selected == "Sobre e Entrevistas":
         width: 100%;
         height: 100%;
         border: none;
+    }
+
+    /* Imagens responsivas e espaçamento uniforme */
+    .fixed-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 10px; /* Espaço entre imagem e legenda */
+    }
+    .caption {
+        text-align: center;
+        font-size: 14px;
+        margin-bottom: 20px; /* Espaço entre cada bloco de imagem */
     }
     </style>
 
@@ -359,74 +354,68 @@ elif selected == "Sobre e Entrevistas":
     </div>
     """, unsafe_allow_html=True)
 
-
-        # 5 colunas
+    # 5 colunas de imagens
     col1, col2, col3, col4, col5 = st.columns(5)
 
-        # -------- COLUNA 1
     with col1:
-            st.markdown("""
-            <div>
-                <img src='https://i.postimg.cc/bGMdpdt2/Whats-App-Image-2025-11-14-at-12-22-06-AM.jpg' class='fixed-img'>
-                <p class='caption'>A Procura de Pessoas</p>
-            </div>
-            <div>
-                <img src='https://i.postimg.cc/cKj606n2/Whats-App-Image-2025-11-14-at-12-29-40-AM-2.jpg' class='fixed-img'>
-                <p class='caption'>Gravação</p>
-            </div>
-            """, unsafe_allow_html=True)
+        st.markdown("""
+        <div>
+            <img src='https://i.postimg.cc/bGMdpdt2/Whats-App-Image-2025-11-14-at-12-22-06-AM.jpg' class='fixed-img'>
+            <p class='caption'>A Procura de Pessoas</p>
+        </div>
+        <div>
+            <img src='https://i.postimg.cc/cKj606n2/Whats-App-Image-2025-11-14-at-12-29-40-AM-2.jpg' class='fixed-img'>
+            <p class='caption'>Gravação</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-        # -------- COLUNA 2
     with col2:
-            st.markdown("""
-            <div>
-                <img src='https://i.postimg.cc/f3kkGYJf/Whats-App-Image-2025-11-14-at-12-23-15-AM.jpg' class='fixed-img'>
-                <p class='caption'>1° Entrevista</p>
-            </div>
-            <div>
-                <img src='https://i.postimg.cc/R38q4qH3/Whats-App-Image-2025-11-14-at-12-22-57-AM.jpg' class='fixed-img'>
-                <p class='caption'>Entrevista 1 - Gravação</p>
-            </div>
-            """, unsafe_allow_html=True)
+        st.markdown("""
+        <div>
+            <img src='https://i.postimg.cc/f3kkGYJf/Whats-App-Image-2025-11-14-at-12-23-15-AM.jpg' class='fixed-img'>
+            <p class='caption'>1° Entrevista</p>
+        </div>
+        <div>
+            <img src='https://i.postimg.cc/R38q4qH3/Whats-App-Image-2025-11-14-at-12-22-57-AM.jpg' class='fixed-img'>
+            <p class='caption'>Entrevista 1 - Gravação</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-        # -------- COLUNA 3
     with col3:
-            st.markdown("""
-            <div>
-                <img src='https://i.postimg.cc/063rPrwt/Whats-App-Image-2025-11-14-at-12-29-39-AM.jpg' class='fixed-img'>
-                <p class='caption'>2° Entrevista</p>
-            </div>
-            <div>
-                <img src='https://i.postimg.cc/fb69pRsN/Whats-App-Image-2025-11-13-at-10-10-31-AM.jpg' class='fixed-img'>
-                <p class='caption'>Entrevista 2 - Gravação</p>
-            </div>
-            """, unsafe_allow_html=True)
+        st.markdown("""
+        <div>
+            <img src='https://i.postimg.cc/063rPrwt/Whats-App-Image-2025-11-14-at-12-29-39-AM.jpg' class='fixed-img'>
+            <p class='caption'>2° Entrevista</p>
+        </div>
+        <div>
+            <img src='https://i.postimg.cc/fb69pRsN/Whats-App-Image-2025-11-13-at-10-10-31-AM.jpg' class='fixed-img'>
+            <p class='caption'>Entrevista 2 - Gravação</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-        # -------- COLUNA 4
     with col4:
-            st.markdown("""
-            <div>
-                <img src='https://i.postimg.cc/cKj606nP/Whats-App-Image-2025-11-14-at-12-29-40-AM.jpg' class='fixed-img'>
-                <p class='caption'>3° Entrevista</p>
-            </div>
-            <div>
-                <img src='https://i.postimg.cc/vmt96zyr/Whats-App-Image-2025-11-14-at-12-21-37-AM.jpg' class='fixed-img'>
-                <p class='caption'>Entrevista 3 - Gravação</p>
-            </div>
-            """, unsafe_allow_html=True)
+        st.markdown("""
+        <div>
+            <img src='https://i.postimg.cc/cKj606nP/Whats-App-Image-2025-11-14-at-12-29-40-AM.jpg' class='fixed-img'>
+            <p class='caption'>3° Entrevista</p>
+        </div>
+        <div>
+            <img src='https://i.postimg.cc/vmt96zyr/Whats-App-Image-2025-11-14-at-12-21-37-AM.jpg' class='fixed-img'>
+            <p class='caption'>Entrevista 3 - Gravação</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-        # -------- COLUNA 5
     with col5:
-            st.markdown("""
-            <div>
-                <img src='https://i.postimg.cc/yJ5WsWZr/Whats-App-Image-2025-11-14-at-12-29-40-AM-1.jpg' class='fixed-img'>
-                <p class='caption'>4° Entrevista</p>
-            </div>
-            <div>
-                <img src='https://i.postimg.cc/7ZjhYtWB/Whats-App-Image-2025-11-13-at-10-10-44-AM.jpg' class='fixed-img'>
-                <p class='caption'>Entrevista 4 - Gravação</p>
-            </div>
-            """, unsafe_allow_html=True)
+        st.markdown("""
+        <div>
+            <img src='https://i.postimg.cc/yJ5WsWZr/Whats-App-Image-2025-11-14-at-12-29-40-AM-1.jpg' class='fixed-img'>
+            <p class='caption'>4° Entrevista</p>
+        </div>
+        <div>
+            <img src='https://i.postimg.cc/7ZjhYtWB/Whats-App-Image-2025-11-13-at-10-10-44-AM.jpg' class='fixed-img'>
+            <p class='caption'>Entrevista 4 - Gravação</p>
+        </div>
+        """, unsafe_allow_html=True)
 
 
 # ==================================================================== #
