@@ -126,277 +126,108 @@ if selected == "Informações":
     
     st.markdown("#### Descarte de Lixo Eletrônico")
     
-    st.markdown(
-        "Descarte de Lixo Eletrônico, conhecido também como e-lixo ou REEE "
-        "(Resíduo de Equipamentos Elétricos e Eletrônicos).\n\n"
-        "Para descartar lixo eletrônico de forma correta, é necessário encontrar "
-        "pontos de coleta especializados, como ecopontos e centros de reciclagem. "
-        "Algumas empresas têm programas de logística reversa que permitem que os "
-        "clientes devolvam os seus produtos usados para reciclagem.\n\n"
-        "É muito importante se atentar de que as baterias de lítio "
-        "(em celulares, notebooks etc.) permanecem nos equipamentos durante a coleta.\n\n"
-        "**Malefícios do Descarte Incorreto:** O descarte inadequado causa danos "
-        "à saúde e ao meio ambiente, contribuindo para a contaminação do solo e da água."
-    )
-
-    st.markdown(
-        "### Tipos de Lixo Eletrônico:\n"
-        "O lixo eletrônico é classificado em quatro (4) categorias diferentes:\n\n"
-        "- **Linha Verde:** Incluindo dispositivos como computadores, laptops, celulares, tablets etc. "
-        "Eles contêm metais preciosos e componentes que necessitam um cuidado especial para evitar impactos ambientais.\n"
-        "- **Linha Branca:** Eletrodomésticos de grande porte, como geladeiras, freezers, máquinas de lavar e micro-ondas. "
-        "Esses itens têm componentes recicláveis e precisam ser tratados adequadamente para promover a reciclagem eficiente.\n"
-        "- **Linha Marrom:** Refere-se a equipamentos de áudio e vídeo, incluindo televisores, rádios, câmeras e aparelhos de som. "
-        "Muitos desses dispositivos contêm substâncias tóxicas que requerem tratamento específico para evitar o impacto ambiental.\n"
-        "- **Linha Azul:** Eletrodomésticos de uso geral, como ferramentas elétricas e eletrônicas, brinquedos, dispositivos médicos e de monitoramento."
-    )
-
-    # Imagem 1
-    url_imagem = "https://vcx.solutions/wp-content/uploads/2021/12/4-categoria-de-lixos-eletronicos_Prancheta-1-1024x836.png"
-    st.image(url_imagem, caption="Categorias de Lixo Eletrônico", use_column_width=True)
-
-    st.markdown(
-        "### O que descartar?\n"
-        "- **Dispositivos:** Celulares, computadores (notebooks, desktops), tablets, monitores, impressoras, controles remotos, câmeras.\n"
-        "- **Eletrodomésticos:** Geladeiras, fogões, micro-ondas, cafeteiras, torradeiras, ventiladores.\n"
-        "- **Equipamentos de comunicações:** Fones de ouvido, cabos, carregadores.\n"
-        "- **Outros:** Pilhas e baterias (de celular, de brinquedos, etc.), lâmpadas fluorescentes, CDs e DVDs."
-    )
-
-    st.markdown(
-        "### Bateria de Lítio\n"
-        "Bateria íon-lítio ou bateria de íon lítio é um tipo de bateria recarregável "
-        "muito utilizada em equipamentos eletrônicos portáteis."
-    )
-
-    # Imagem 2
-    url_imagem = "https://tse2.mm.bing.net/th/id/OIP.O6bVxbkVhabSKwwdyt4qxgHaKe?w=1131&h=1600&rs=1&pid=ImgDetMain&o=7&rm=3"
-    st.image(url_imagem, caption="Descarte de Bateria de Lítio", use_column_width=True)
-
-    st.markdown(
-        "### Risco da bateria de Lítio\n"
-        "O principal risco é o de incêndio, já que as baterias de íon-lítio combinam "
-        "materiais de alta energia com eletrólitos, muitas vezes inflamáveis. "
-        "Danos no separador dentro das baterias podem causar um curto-circuito interno "
-        "com altas chances de fuga térmica."
-    )
-
-    st.markdown(
-        "### Lâmpadas fluorescentes\n"
-        "O descarte correto de lâmpadas fluorescentes é essencial para proteger o meio "
-        "ambiente e nossa saúde, pois contêm mercúrio, um metal pesado tóxico. "
-        "Elas não devem ser jogadas no lixo comum, mas sim encaminhadas para pontos de "
-        "coleta específicos ou empresas especializadas em tratamento de resíduos."
-    )
-
-    # Imagem 3
-    url_imagem = "https://tse2.mm.bing.net/th/id/OIP.MrZrjUgxYC8MNgEEDIKj5AHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
-    st.image(url_imagem, caption="Descarte de lâmpadas Fluorescentes", use_column_width=True)
-
-    st.markdown(
-        "### Riscos das lâmpadas\n"
-        "O descarte incorreto pode causar danos ambientais, como contaminação do solo e da água, "
-        "além de riscos à saúde humana devido à toxicidade do mercúrio."
-    )
-    with st.expander("ℹ️ Créditos"):
-            
-        st.markdown("""    **Créditos do Projeto EcoTech**
-        Projeto desenvolvido pela turma 3ºA da Escola Estadual Professor Alberto Conte, com contribuição coletiva
-    
-        Pesquisa
-        - Samira
-        - Ana Carolina
-        
-        **Entrevistas**
-        - Ocativo (Entrevistador)
-        - Matheus B (Operador de Câmera)
-        - Emanuel (Editor)
-        - Maria Clara
-        - Evelyn Bea
-        - (Todos desta lista contribuiram para as perguntas)
-        
-        **Ideias**
-        - 3ºA
-        
-        **Desenvolvimento Técnico do Site**
-        - Pedro Henrique  
-        - Matheus Andrade 
-        - Sania
-        - Davi
-        - Samuel Ribeiro
-        - Possiveis manutenções e atualizações: Pedro Henrique
-        """)
-
-# ==================================================================== #
-# =========================== ABA SOBRE ============================== #
-elif selected == "Sobre e Entrevistas":
     st.markdown("""
-    <style>
-    .divider-red {
-        border-top: 3px solid red;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    h2 {
-        text-align: center;
-        color: black;
-        font-size: 4vw;
-    }
-    @media (max-width: 768px) {
-        h2 {
-            font-size: 6vw;
-        }
-    }
-    </style>
-    """, unsafe_allow_html=True)
+                <style>
+                /* Todas as imagens com borda e proporção */
+                .responsive-img {
+                    width: 70%;        /* Tamanho padrão desktop */
+                    height: auto;
+                    border-radius: 12px;
+                    margin-bottom: 20px;
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
 
-    st.markdown(f"<h2>{selected}</h2>", unsafe_allow_html=True)
-    st.header("", divider = "blue")
-    
-    st.markdown("### EcoTech - O Início")
+                /* Para telas pequenas (celular) */
+                @media (max-width: 1200px) {
+                    .responsive-img {
+                        width: 85%;    /* Tablet: ocupa mais espaço */
+                    }
+                }
 
-    st.markdown(
-            "Nosso projeto começou em uma quarta-feira qualquer, quando recebemos um pedido "
-            "para a criação de um site sobre o descarte consciente de lixo eletrônico. "
-            "A proposta parecia simples no início, mas logo percebemos que seria um verdadeiro desafio.\n\n"
-            "Decidimos seguir em frente, motivados pela ideia de contribuir com um tema tão relevante e atual. "
-            "A partir desse momento, iniciou-se uma intensa discussão entre os membros da equipe — "
-            "afinal, estávamos diante de um trabalho que exigiria organização, criatividade e comprometimento de todos.\n\n"
-            "Nos primeiros dias, nosso foco foi definir o nome, a paleta de cores e o design inicial do site. "
-            "Queríamos que o projeto transmitisse uma mensagem de responsabilidade ambiental, ao mesmo tempo em que fosse atrativo e fácil de navegar.\n\n"
-            "Para aproveitar melhor as habilidades individuais, decidimos dividir o grupo em equipes específicas, "
-            "responsáveis por diferentes áreas do desenvolvimento: divulgação, codificação, execução, pesquisa e desenvolvimento visual. "
-            "Cada equipe recebeu prazos e metas, e as tarefas eram acompanhadas de perto durante as reuniões semanais, realizadas sempre às quartas-feiras.\n\n"
-            "Esses encontros serviam não apenas para discutir o andamento do projeto, mas também para trocar ideias, revisar decisões e propor melhorias. "
-            "Durante alguns meses, o processo foi marcado por muita pesquisa, debates e pequenos avanços. "
-            "No entanto, com o tempo, nosso professor percebeu que o prazo inicial de um ano estava se tornando inviável, pois o progresso prático era lento e fragmentado.\n\n"
-            "Foi então que recebemos uma nova orientação: simplificar o processo e migrar completamente para o Streamlit, uma ferramenta mais prática para o desenvolvimento do site. "
-            "A decisão também trouxe uma mudança drástica na estrutura da equipe — as divisões por grupo foram eliminadas, e todos passaram a trabalhar de forma conjunta em todas as etapas do projeto. "
-            "Além disso, o prazo foi reduzido para apenas quatro meses, o que exigiu uma reestruturação completa do cronograma e das prioridades.\n\n"
-            "A partir desse ponto, deixamos de lado as discussões prolongadas sobre detalhes estéticos e passamos a agir de forma mais objetiva, priorizando entregas concretas e a funcionalidade do site. "
-            "O ambiente de trabalho se tornou mais dinâmico e colaborativo, com cada integrante contribuindo diretamente para o avanço coletivo. "
-            "Essa virada de abordagem não apenas acelerou o desenvolvimento, mas também fortaleceu o espírito de equipe — mostrando que, mesmo diante de imprevistos e prazos apertados, a união e a adaptação são fundamentais para transformar uma ideia inicial em um resultado real e funcional."
-        )
-        
-    st.markdown("""
-    <style>
-    .divider-red {
-        border-top: 3px solid red;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    h2 {
-        text-align: center;
-        color: black;
-        font-size: 4vw;
-    }
-    @media (max-width: 768px) {
-        h2 {
-            font-size: 6vw;
-        }
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f"<h2>Entrevistas</h2>", unsafe_allow_html=True)
-    st.divider()
-
-    st.markdown("""
-    <style>
-    /* Vídeo responsivo */
-    .responsive-video {
-        position: relative;
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
-        border-radius: 12px;
-        margin-bottom: 40px;
-    }
-    .responsive-video iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-
-    /* Imagens responsivas */
-    .fixed-img {
-        width: 100%;
-        height: auto;       /* Mantém proporção */
-        border-radius: 12px;
-        margin-bottom: 10px;
-    }
-    .caption {
-        text-align: center;
-        font-size: 14px;
-        margin-bottom: 20px;
-    }
-
-    /* Layout responsivo das colunas */
-    @media (max-width: 1200px) {
-        .stColumn {
-            width: 33.33% !important;  /* 3 colunas em telas médias */
-        }
-    }
-    @media (max-width: 768px) {
-        .stColumn {
-            width: 100% !important;    /* 1 coluna em celular */
-        }
-    }
-    </style>
-
-    <div class="responsive-video">
-        <iframe 
-            src="https://www.youtube.com/embed/NklcpkNMhSE?controls=1&rel=0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Organizando imagens em listas
-    colunas_imagens = [
-        [
-            ("https://i.postimg.cc/bGMdpdt2/Whats-App-Image-2025-11-14-at-12-22-06-AM.jpg", "A Procura de Pessoas"),
-            ("https://i.postimg.cc/cKj606n2/Whats-App-Image-2025-11-14-at-12-29-40-AM-2.jpg", "Gravação")
-        ],
-        [
-            ("https://i.postimg.cc/f3kkGYJf/Whats-App-Image-2025-11-14-at-12-23-15-AM.jpg", "1° Entrevista"),
-            ("https://i.postimg.cc/R38q4qH3/Whats-App-Image-2025-11-14-at-12-22-57-AM.jpg", "Entrevista 1 - Gravação")
-        ],
-        [
-            ("https://i.postimg.cc/063rPrwt/Whats-App-Image-2025-11-14-at-12-29-39-AM.jpg", "2° Entrevista"),
-            ("https://i.postimg.cc/fb69pRsN/Whats-App-Image-2025-11-13-at-10-10-31-AM.jpg", "Entrevista 2 - Gravação")
-        ],
-        [
-            ("https://i.postimg.cc/cKj606nP/Whats-App-Image-2025-11-14-at-12-29-40-AM.jpg", "3° Entrevista"),
-            ("https://i.postimg.cc/vmt96zyr/Whats-App-Image-2025-11-14-at-12-21-37-AM.jpg", "Entrevista 3 - Gravação")
-        ],
-        [
-            ("https://i.postimg.cc/yJ5WsWZr/Whats-App-Image-2025-11-14-at-12-29-40-AM-1.jpg", "4° Entrevista"),
-            ("https://i.postimg.cc/7ZjhYtWB/Whats-App-Image-2025-11-13-at-10-10-44-AM.jpg", "Entrevista 4 - Gravação")
-        ]
-    ]
-
-    # Criando colunas
-    cols = st.columns(5)
-    for i, col in enumerate(cols):
-        for img_url, caption in colunas_imagens[i]:
-            with col:
-                st.markdown(f"""
-                <div>
-                    <img src="{img_url}" class="fixed-img">
-                    <p class="caption">{caption}</p>
-                </div>
+                @media (max-width: 768px) {
+                    .responsive-img {
+                        width: 95%;    /* Celular: ocupa quase toda a tela */
+                    }
+                }
+                </style>
                 """, unsafe_allow_html=True)
+
+                # Texto inicial
+    st.markdown(
+                    "Descarte de Lixo Eletrônico, conhecido também como e-lixo ou REEE "
+                    "(Resíduo de Equipamentos Elétricos e Eletrônicos).\n\n"
+                    "Para descartar lixo eletrônico de forma correta, é necessário encontrar "
+                    "pontos de coleta especializados, como ecopontos e centros de reciclagem. "
+                    "Algumas empresas têm programas de logística reversa que permitem que os "
+                    "clientes devolvam os seus produtos usados para reciclagem.\n\n"
+                    "É muito importante se atentar de que as baterias de lítio "
+                    "(em celulares, notebooks etc.) permanecem nos equipamentos durante a coleta.\n\n"
+                    "**Malefícios do Descarte Incorreto:** O descarte inadequado causa danos "
+                    "à saúde e ao meio ambiente, contribuindo para a contaminação do solo e da água."
+                )
+
+    st.markdown(
+                    "### Tipos de Lixo Eletrônico:\n"
+                    "O lixo eletrônico é classificado em quatro (4) categorias diferentes:\n\n"
+                    "- **Linha Verde:** Incluindo dispositivos como computadores, laptops, celulares, tablets etc. "
+                    "Eles contêm metais preciosos e componentes que necessitam um cuidado especial para evitar impactos ambientais.\n"
+                    "- **Linha Branca:** Eletrodomésticos de grande porte, como geladeiras, freezers, máquinas de lavar e micro-ondas. "
+                    "Esses itens têm componentes recicláveis e precisam ser tratados adequadamente para promover a reciclagem eficiente.\n"
+                    "- **Linha Marrom:** Refere-se a equipamentos de áudio e vídeo, incluindo televisores, rádios, câmeras e aparelhos de som. "
+                    "Muitos desses dispositivos contêm substâncias tóxicas que requerem tratamento específico para evitar o impacto ambiental.\n"
+                    "- **Linha Azul:** Eletrodomésticos de uso geral, como ferramentas elétricas e eletrônicas, brinquedos, dispositivos médicos e de monitoramento."
+                )
+
+                # Imagem categorias
+    url_imagem = "https://vcx.solutions/wp-content/uploads/2021/12/4-categoria-de-lixos-eletronicos_Prancheta-1-1024x836.png"
+    st.markdown(f'<img src="{url_imagem}" class="responsive-img">', unsafe_allow_html=True)
+
+    st.markdown(
+                    "### O que descartar?\n"
+                    "- **Dispositivos:** Celulares, computadores (notebooks, desktops), tablets, monitores, impressoras, controles remotos, câmeras.\n"
+                    "- **Eletrodomésticos:** Geladeiras, fogões, micro-ondas, cafeteiras, torradeiras, ventiladores.\n"
+                    "- **Equipamentos de comunicações:** Fones de ouvido, cabos, carregadores.\n"
+                    "- **Outros:** Pilhas e baterias (de celular, de brinquedos, etc.), lâmpadas fluorescentes, CDs e DVDs."
+                )
+
+    st.markdown(
+                    "### Bateria de Lítio\n"
+                    "Bateria íon-lítio ou bateria de íon lítio é um tipo de bateria recarregável "
+                    "muito utilizada em equipamentos eletrônicos portáteis."
+                )
+
+                # Imagem bateria
+    url_imagem = "https://tse2.mm.bing.net/th/id/OIP.O6bVxbkVhabSKwwdyt4qxgHaKe?w=1131&h=1600&rs=1&pid=ImgDetMain&o=7&rm=3"
+    st.markdown(f'<img src="{url_imagem}" class="responsive-img">', unsafe_allow_html=True)
+
+    st.markdown(
+                    "### Risco da bateria de Lítio\n"
+                    "O principal risco é o de incêndio, já que as baterias de íon-lítio combinam "
+                    "materiais de alta energia com eletrólitos, muitas vezes inflamáveis. "
+                    "Danos no separador dentro das baterias podem causar um curto-circuito interno "
+                    "com altas chances de fuga térmica."
+                )
+
+    st.markdown(
+                    "### Lâmpadas fluorescentes\n"
+                    "O descarte correto de lâmpadas fluorescentes é essencial para proteger o meio "
+                    "ambiente e nossa saúde, pois contêm mercúrio, um metal pesado tóxico. "
+                    "Elas não devem ser jogadas no lixo comum, mas sim encaminhadas para pontos de "
+                    "coleta específicos ou empresas especializadas em tratamento de resíduos."
+                )
+
+                # Imagem lâmpadas
+    url_imagem = "https://tse2.mm.bing.net/th/id/OIP.MrZrjUgxYC8MNgEEDIKj5AHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+    st.markdown(f'<img src="{url_imagem}" class="responsive-img">', unsafe_allow_html=True)
+
+    st.markdown(
+                    "### Riscos das lâmpadas\n"
+                    "O descarte incorreto pode causar danos ambientais, como contaminação do solo e da água, "
+                    "além de riscos à saúde humana devido à toxicidade do mercúrio."
+                )
+
 
 
 # ==================================================================== #
