@@ -480,12 +480,16 @@ elif selected == "Opiniões":
             def create_frequency_chart(tokens_list):
                 freq = Counter(tokens_list)
                 df_freq = pd.DataFrame(freq.items(), columns=["palavra", "frequencia"])
-                df_freq = df_freq.sort_values(by="frequencia", ascending=False)  # todas as palavras
+                # ATUALIZAÇÃO 1: Ordenar pela frequência em ordem CRESCENTE (ascendente=True)
+                df_freq = df_freq.sort_values(by="frequencia", ascending=True)
 
-                # Cores verdes proporcionais
-                df_freq["cor"] = df_freq["frequencia"].apply(
-                    lambda x: f"rgb(0,{100 + int(155 * (x / df_freq['frequencia'].max()))},0)"
-                )
+                # ATUALIZAÇÃO 2: Definir uma cor verde escura única para todas as barras.
+                # A Imagem 2 sugere um verde sólido (Ex: rgb(25, 128, 0) ou 'darkgreen')
+                # A coluna 'cor' e o 'color_discrete_map="identity"' não serão mais necessários,
+                # mas podemos usar a cor para manter a estrutura do Plotly Express.
+                COR_VERDE_ESCURO = "rgb(0, 100, 0)" # Ou uma cor similar ao da Imagem 2
+
+                df_freq["cor"] = COR_VERDE_ESCURO
 
                 fig = px.bar(
                     df_freq,
@@ -493,17 +497,24 @@ elif selected == "Opiniões":
                     y="frequencia",
                     text="frequencia",
                     labels={"palavra": "Percepção", "frequencia": "Frequência"},
-                    color="cor",
-                    color_discrete_map="identity"
+                    color="cor", # Mantém a cor baseada na coluna 'cor'
+                    color_discrete_map={"rgb(0, 100, 0)": "rgb(0, 100, 0)"} # Garante que apenas essa cor seja usada
                 )
 
-                fig.update_traces(texttemplate="%{y}", textposition="outside")
+                # Para imitar a Imagem 2, que tem os rótulos de dados dentro ou bem justos, 
+                # mas o código original usava 'outside'. Vou manter 'outside' ou um ajuste se for para parecer *exatamente* com a imagem.
+                # A Imagem 2 não mostra rótulos de dados nos valores 0 e 1 de forma proeminente.
+                # Para seguir o padrão de exibir o texto, mantemos o textposition:
+                fig.update_traces(texttemplate="%{y}", textposition="outside") 
                 fig.update_layout(
                     xaxis_tickangle=-45,
                     margin=dict(t=40, b=40, l=20, r=20),
                     height=400,
                     width=700,
-                    showlegend=False
+                    showlegend=False,
+                    # Cor de fundo e grade, se necessário (a Imagem 2 é clara)
+                    plot_bgcolor='rgb(248, 248, 248)',
+                    paper_bgcolor='rgb(248, 248, 248)',
                 )
 
                 return fig
