@@ -254,7 +254,7 @@ elif selected == "Sobre e Entrevistas":
     """, unsafe_allow_html=True)
 
     st.markdown(f"<h2>{selected}</h2>", unsafe_allow_html=True)
-    st.header("", divider = "blue")
+    st.header("", divider = "red")
     
     st.markdown("### EcoTech - O Início")
 
@@ -305,7 +305,7 @@ elif selected == "Sobre e Entrevistas":
     """, unsafe_allow_html=True)
 
     st.markdown(f"<h2>Entrevistas</h2>", unsafe_allow_html=True)
-    st.header("", divider = "green")
+    st.header("", divider = "blue")
 
     st.markdown("""
     <style>
@@ -425,7 +425,7 @@ elif selected == "Opiniões":
             </style>
             """, unsafe_allow_html=True)
     st.markdown(f"<h2>Opiniões</h2>", unsafe_allow_html=True)
-    st.header("", divider="red")
+    st.header("", divider="green")
 
     # ================================
     # 🔹 ESTILO CSS
