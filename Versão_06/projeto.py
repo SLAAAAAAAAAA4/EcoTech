@@ -366,7 +366,7 @@ elif selected == "Sobre e Entrevistas":
 # ==================================================================== #
 # =========================== ABA OPINIÕES =========================== #
 elif selected == "Opiniões":
-    st.header(f"{selected}", divider="blue")
+    st.header(f"ㅤㅤㅤㅤㅤㅤㅤㅤㅤ{selected}", divider="blue")
 
     # ================================
     # 🔹 ESTILO CSS
