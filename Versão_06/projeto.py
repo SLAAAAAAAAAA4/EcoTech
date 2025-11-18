@@ -99,7 +99,30 @@ with st.sidebar:
 # ==================================================================== #
 # ======================= ABA INFORMAÇÕES ============================ #
 if selected == "Informações":
-    st.header(f"ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ{selected}", divider="green")
+    st.markdown("""
+            <style>
+            .divider-red {
+                border-top: 3px solid red;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            h2 {
+                text-align: center;
+                color: black;
+                font-size: 4vw;
+            }
+            @media (max-width: 768px) {
+                h2 {
+                    font-size: 6vw;
+                }
+            }
+            </style>
+            """, unsafe_allow_html=True)
+    st.markdown(f"<h2>Informções</h2>", unsafe_allow_html=True)
+    st.divider()
     
     st.markdown("#### Descarte de Lixo Eletrônico")
     
