@@ -121,7 +121,7 @@ if selected == "Informações":
             }
             </style>
             """, unsafe_allow_html=True)
-    st.markdown(f"<h2>Informções</h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2>Informações</h2>", unsafe_allow_html=True)
     st.header("", divider="green")
     
     st.markdown("#### Descarte de Lixo Eletrônico")
